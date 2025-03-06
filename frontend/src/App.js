@@ -1,3 +1,6 @@
+
+// Define Login and register routes.
+
 import logo from './logo.svg';
 import './App.css';
 
