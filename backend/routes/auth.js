@@ -1,3 +1,5 @@
+//Handle user registration and login
+
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -6,6 +8,7 @@ const User = require("../models/user");
 const router = express.Router();
 
 //Register User
+
 router.post("/register", async (req, res) => {
   const { email, password } = req.body;
 
@@ -18,20 +21,21 @@ router.post("/register", async (req, res) => {
 
     user = new User({ email, password: hashedPassword });
     await user.save();
+
     res.json({ msg: "User registered successfully" });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
 // Login User
 
 router.post("/login", async (req, res) => {
-  const { emai, password } = req.body;
+  const { email, password } = req.body;
 
   try {
     let user = await User.findOne({ email });
-    if (!uesr) return res.status(400).json({ msg: "Invalid credentials" });
+    if (!user) return res.status(400).json({ msg: "Invalid credentials" });
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ msg: "Invalid credentials" });
