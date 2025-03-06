@@ -12,7 +12,7 @@ app.use(cors());
 mongoose
 .connect(process.env.MONGO-URIError, {useNewUrlParser: true, useUnifiedTopology:true})
 .then(() => console.log("MongoDB Connected"))
-.catch((error) => console.log(erro));
+.catch((error) => console.log(error));
 
 // Routes
 
